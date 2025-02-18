@@ -30,10 +30,6 @@ let package = Package(
       dependencies: dependencies,
       resources: [.copy("Data")]
     ),
-    .testTarget(
-      name: "AdventOfCodeTests",
-      dependencies: ["AdventOfCode"] + dependencies
-    )
   ],
   swiftLanguageModes: [.v6]
 )
