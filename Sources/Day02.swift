@@ -5,8 +5,8 @@ struct Day02: AdventDay {
 
   var entities: [[Int]] {
     data
-      .split(separator: "\n")
-      .map { $0.split(separator:" ").compactMap { Int($0) }}
+      .split(whereSeparator: \.isNewline)
+      .map { $0.split(whereSeparator: \.isWhitespace).compactMap { Int($0) }}
   }
   
   func checkIsSafe(_ line: [Int]) -> Bool {

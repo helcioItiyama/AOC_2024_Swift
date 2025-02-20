@@ -7,8 +7,13 @@ struct Day10: AdventDay {
 
   var entities: [[Int]] {
     data
-      .split(separator: "\n")
-      .map { $0.split(separator: "").compactMap { Int($0) }}
+      .split(whereSeparator: \.isNewline)
+      .map { $0.compactMap { Int(String($0)) }}
+  }
+  
+  struct Position: Hashable {
+    let x: Int
+    let y: Int
   }
   
   func part1() -> Int {

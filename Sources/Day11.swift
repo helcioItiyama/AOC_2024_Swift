@@ -5,8 +5,13 @@ struct Day11: AdventDay {
 
   var entities: [Int] {
     data
-      .split(whereSeparator: { $0.isWhitespace })
+      .split(whereSeparator: \.isWhitespace)
       .compactMap { Int($0) }
+  }
+  
+  struct Position: Hashable {
+    let x: Int
+    let y: Int
   }
   
   func part1() -> Int {

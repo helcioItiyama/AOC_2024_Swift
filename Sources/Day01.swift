@@ -5,8 +5,8 @@ struct Day01: AdventDay {
 
   var entities: [[Int]] {
     data
-        .split(separator: "\n")
-        .map { $0.split(separator: "   ").map { Int($0)! } }
+      .split(whereSeparator: \.isNewline)
+        .map { $0.split(whereSeparator: \.isWhitespace).compactMap { Int($0) } }
         .reduce(into: [[], []]) { acc, current in
           acc[0].append(current[0])
           acc[1].append(current[1])

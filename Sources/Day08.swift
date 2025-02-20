@@ -2,18 +2,16 @@ import Algorithms
 
 // This code is based on HyperNeutrino's
 
-struct Positions: Hashable {
-  let x: Int
-  let y: Int
-}
-
 struct Day08: AdventDay {
   var data: String
 
   var entities: [[String]] {
-    data
-      .split(separator: "\n")
-      .map { line in line.split(separator: "").map(String.init) }
+    data.split(whereSeparator: \.isNewline).map { $0.map(String.init) }
+  }
+  
+  struct Position: Hashable {
+    let x: Int
+    let y: Int
   }
   
   var antennas: [String: [(Int, Int)]] {
@@ -32,15 +30,15 @@ struct Day08: AdventDay {
   }
   
   func part1() -> Int {
-    var antinodes = Set<Positions>()
+    var antinodes = Set<Position>()
     
     for arr in antennas.values {
       for i in 0..<arr.endIndex {
         for j in (i + 1)..<arr.endIndex {
           let (r1, c1) = arr[i]
           let (r2, c2) = arr[j]
-          antinodes.insert(Positions(x: 2 * r1 - r2, y: 2 * c1 - c2))
-          antinodes.insert(Positions(x: 2 * r2 - r1, y: 2 * c2 - c1))
+          antinodes.insert(Position(x: 2 * r1 - r2, y: 2 * c1 - c2))
+          antinodes.insert(Position(x: 2 * r2 - r1, y: 2 * c2 - c1))
         }
       }
     }
@@ -51,7 +49,7 @@ struct Day08: AdventDay {
   }
 
   func part2() -> Int {
-    var antinodes = Set<Positions>()
+    var antinodes = Set<Position>()
     
     for arr in antennas.values {
       for i in 0..<arr.endIndex {
@@ -64,7 +62,7 @@ struct Day08: AdventDay {
           var r = r1
           var c = c1
           while 0 <= r && r < entities.count && 0 <= c && c < entities[0].count {
-            antinodes.insert(Positions(x: r, y: c))
+            antinodes.insert(Position(x: r, y: c))
             r += dr
             c += dc
           }

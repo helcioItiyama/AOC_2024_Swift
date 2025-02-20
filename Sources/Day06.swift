@@ -1,10 +1,5 @@
 import Algorithms
 
-struct Position: Hashable {
-  let x: Int
-  let y: Int
-}
-
 class Matrix {
   var data: [[String]]
   var row = 0
@@ -37,8 +32,13 @@ struct Day06: AdventDay {
 
   var entities: [[String]] {
     data
-      .split(separator: "\n")
-      .map { $0.split(separator: "").map(String.init) }
+      .split(whereSeparator: \.isNewline)
+      .map { $0.map(String.init) }
+  }
+  
+  struct Position: Hashable {
+    let x: Int
+    let y: Int
   }
 
   func part1() -> Int {

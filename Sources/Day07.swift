@@ -7,11 +7,11 @@ struct Day07: AdventDay {
 
   var entities: [(String, [Int])] {
     return data
-      .split(separator: "\n")
+      .split(whereSeparator: \.isNewline)
       .map { line in
         let parts = line.split(separator: ":")
         let key = String(parts[0])
-        let values = parts[1].split(separator: " ").compactMap{ Int($0) }
+        let values = parts[1].split(whereSeparator: \.isWhitespace).compactMap{ Int($0) }
         return (key, values)
       }
   }

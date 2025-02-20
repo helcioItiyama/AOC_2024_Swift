@@ -4,9 +4,7 @@ struct Day09: AdventDay {
   var data: String
 
   var entities: [[String]] {
-    data
-      .split(separator: "\n")
-      .map { line in line.split(separator: "").map(String.init) }
+    data.split(whereSeparator: \.isNewline).map { $0.map(String.init) }
   }
   
   func part1() -> Int {

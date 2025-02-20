@@ -6,7 +6,7 @@ struct Day05: AdventDay {
 
   var entities: ([Int: [Int]], [[Int]]) {
     let pattern = try! Regex(#"\d+\|\d+"#)
-    let lines = data.split(separator: "\n").map(String.init)
+    let lines = data.split(whereSeparator: \.isNewline).map(String.init)
     
     let (left, right) = lines.partitioned(by: { $0.wholeMatch(of: pattern) == nil })
     
@@ -23,7 +23,7 @@ struct Day05: AdventDay {
   func checkIfIsCorrect(_ arr: [Int], _ rules: [Int: [Int]]) -> Bool {
     arr.enumerated().allSatisfy { index, value in
       if index == 0 { return true }
-      return rules[value]?.contains(arr[index - 1]) == true
+      return rules[value, default: []].contains(arr[index - 1])
     }
   }
 
